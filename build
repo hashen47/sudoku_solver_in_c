@@ -7,7 +7,7 @@ test="tests"
 bin="bin"
 
 # compile the main program (src/main.c)
-$cc $flags -o $bin/main $src/util.c $src/board.c $src/main.c
+$cc $flags -o $bin/main $src/util.c $src/board.c $src/main.c -lm
 
 # compile the testcases (tests/board_test.c)
-$cc $flags -o $bin/test $src/util.c $src/board.c $test/board_test.c
+$cc $flags -o $bin/test $src/util.c $src/board.c $test/board_test.c -lm
