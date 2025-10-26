@@ -13,14 +13,15 @@ int main(int argc, char **argv)
 	}
 
 	const char* puzzle = *(argv + 1);
-	if (strlen(puzzle) != GRID_SQR_COUNT)
+
+	Board *b = BoardInit(puzzle);
+	if (b == NULL)
 	{
 		printf("Invalid puzzle input...\n");
 		exit(EXIT_FAILURE);
 	}
 
 
-	Board *b = BoardInit(puzzle);
 	Solution_Array* solutions = BoardSolve(b);
 	if (solutions == NULL)
 	{
@@ -29,7 +30,7 @@ int main(int argc, char **argv)
 	}
 
 	printf("\nPuzzle:\n");
-	PrintGrid(puzzle);
+	GridPrint(b->grid, b->grid_width, b->square_width);
 
 	if (Solution_Array_Size(solutions) == 0)
 	{
@@ -42,7 +43,7 @@ int main(int argc, char **argv)
 	{
 		const char* solution = Solution_Array_Get(solutions, i);
 		printf("Solution: %zu\n", i+1);
-		PrintGrid(solution);
+		GridPrint(solution, b->grid_width, b->square_width);
 	}
 
 	Solution_Array_Free(solutions);
